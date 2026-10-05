@@ -1,0 +1,80 @@
+git clone --filter=blob:none --no-checkout https://github.com/jonasschmedtmann/complete-node-bootcamp.git
+cd complete-node-bootcamp
+git sparse-checkout init --cone
+git sparse-checkout set 1-node-farm/starter
+git checkout master
+code .
+
+^ to previous command.
+ctrl+k clear the terminal.
+
+fs.appendFile(file, data, options, callback);
+
+
+// method:1
+const path = require('path');
+const tempOverview = fs.readFileSync(
+  path.join(__dirname, 'templates', 'template-overview.html'),
+  'utf-8'
+);
+
+method:2
+fs.readFileSync(
+  `${__dirname}/templates/template-overview.html`,
+  'utf-8'
+);
+
+
+module.exports = (temp, product) => {
+  let output = temp
+    .replace(/{%PRODUCTNAME%}/g, product.productName)
+    .replace(/{%IMAGE%}/g, product.image)
+    .replace(/{%PRICE%}/g, product.price)
+    .replace(/{%FROM%}/g, product.from)
+    .replace(/{%NUTRIENTS%}/g, product.nutrients)
+    .replace(/{%QUANTITY%}/g, product.quantity)
+    .replace(/{%DESCRIPTION%}/g, product.description)
+    .replace(/{%ID%}/g, product.id)
+    .replace(/{%NOT_ORGANIC%}/g, product.organic ? '' : 'not-organic');
+
+  return output;
+};
+
+.replace() does not change output.
+
+Instead, it creates a new string:
+
+Ctrl + D → select the next occurrence
+Ctrl + Shift + L → select all occurrences
+Ctrl + F2 → select all occurrences of the current word
+
+const { pathname, searchParams } = new URL(
+  req.url,
+  `http://${req.headers.host}`
+);
+
+const query = Object.fromEntries(searchParams);
+
+console.log(pathname);
+console.log(query.id);
+
+const { pathname, searchParams } = new URL(
+  req.url,
+  `http://${req.headers.host}`
+);
+
+const query = Object.fromEntries(searchParams);
+
+console.log(pathname);
+console.log(query.id);
+
+
+
+// Source - https://stackoverflow.com/a/8131696
+// Posted by fent, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-10-05, License - CC BY-SA 3.0
+
+var fs = require('fs');
+
+console.log(require('./files/config.json'));
+console.log(fs.readFileSync('./files/somefile.txt', 'utf8'));
